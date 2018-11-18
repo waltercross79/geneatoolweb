@@ -18,9 +18,9 @@
           <td>{{ p.dateOfBirth | date }}</td>
           <td>{{ p.dateOfDeath | date }}</td>
           <td>
-            <button [routerLink]="['/persons/detail', p.id]" class="pure-button">View</button>
-            <button class="pure-button">Edit</button>
-            <button class="pure-button">Delete</button>
+            <button [routerLink]="['/persons/detail', p.id]" class="pure-button-primary pure-button">View</button>
+            <button [routerLink]="['/persons/edit', p.id]" class="pure-button-secondary pure-button">Edit</button>
+            <button class="button-error pure-button">Delete</button>
           </td>
         </tr>
       </tbody>

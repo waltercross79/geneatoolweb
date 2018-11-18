@@ -20,7 +20,7 @@ export class PersonEditorComponent implements OnInit {
       
       this.isEditing = activeRoute.snapshot.params['mode'] == 'edit';
       if(this.isEditing) {
-        Object.assign(personRepo.getPerson(activeRoute.snapshot.params['id']));
+        Object.assign(this.person, personRepo.getPerson(activeRoute.snapshot.params['id']));
       }
   }
 

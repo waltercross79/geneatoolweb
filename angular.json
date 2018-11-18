@@ -22,10 +22,10 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/styles.css",
+            "styles": [              
               "node_modules/purecss/build/pure-min.css",
-              "node_modules/purecss/build/grids-responsive-min.css"
+              "node_modules/purecss/build/grids-responsive-min.css",
+              "src/styles.css"
             ],
             "scripts": []
           },

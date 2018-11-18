@@ -4,9 +4,35 @@
     </div>
     <div class="pure-u-2-3">
         <form>
-            <div class="pure-u-1-5">First Name:</div>
-            <div class="pure-u-4-5">
-                <input type="text" [(ngModel)]="person.firstName" />
+            <div class="pure-u-1-5 l-box">First Name:</div>
+            <div class="pure-u-4-5 l-box">
+                <input type="text" [(ngModel)]="person.firstName" name="firstName" />
+            </div>
+            <div class="pure-u-1-5 l-box">Last Name:</div>
+            <div class="pure-u-4-5 l-box">
+                <input type="text" [(ngModel)]="person.lastName" name="lastName" />
+            </div>
+            <div class="pure-u-1-5 l-box">Middle Name:</div>
+            <div class="pure-u-4-5 l-box">
+                <input type="text" [(ngModel)]="person.middleName" name="middleName" />
+            </div>
+            <div class="pure-u-1-5 l-box">Date of Birth:</div>
+            <div class="pure-u-4-5 l-box">
+                <input type="date" [ngModel]="person.dateOfBirth | date:'yyyy-MM-dd'" 
+                    (ngModelChange)="person.dateOfBirth=$event" name="dateOfBirth" />
+            </div>
+            <div class="pure-u-1-5 l-box">Date of Death:</div>
+            <div class="pure-u-4-5 l-box">
+                <input type="date" [ngModel]="person.dateOfDeath | date:'yyyy-MM-dd'" 
+                    (ngModelChange)="person.dateOfDeath=$event" name="dateOfDeath" />
+            </div>
+            <div class="pure-u-1 l-box">
+                <button type="submit" class="pure-button pure-button-primary" [class.pure-button-warning]="isEditing">
+                    {{isEditing ? "Save" : "Create"}}
+                </button>
+                <button type="reset" class="pure-button pure-button-secondary" routerLink="/persons">
+                    Cancel
+                </button>
             </div>
         </form>
     </div>
