@@ -26,6 +26,14 @@
                 <input type="date" [ngModel]="person.dateOfDeath | date:'yyyy-MM-dd'" 
                     (ngModelChange)="person.dateOfDeath=$event" name="dateOfDeath" />
             </div>
+            <div class="pure-u-1-5 l-box">Gender:</div>
+            <div class="pure-u-4-5 l-box">
+                <!-- <input type="date" [ngModel]="person.dateOfDeath | date:'yyyy-MM-dd'" 
+                    (ngModelChange)="person.dateOfDeath=$event" name="dateOfDeath" /> -->
+                <select name="gender" [(ngModel)]="person.gender">
+                    <option *ngFor="let g of genders" [value]="g[0]">{{ g[1] }}</option>
+                </select>
+            </div>
             <div class="pure-u-1 l-box">
                 <button type="submit" class="pure-button pure-button-primary" [class.pure-button-warning]="isEditing">
                     {{isEditing ? "Save" : "Create"}}

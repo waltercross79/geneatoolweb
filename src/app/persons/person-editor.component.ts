@@ -14,6 +14,7 @@ export class PersonEditorComponent implements OnInit {
 
   person: Person = new Person();
   isEditing: boolean = false;
+  genders: [string, string][] = [['M', 'Male'], ['F', 'Female']];
 
   constructor(personRepo: PersonRepository, 
     router: Router, activeRoute: ActivatedRoute) { 

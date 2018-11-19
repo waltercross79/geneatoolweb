@@ -8,11 +8,13 @@ import { PersonDetailComponent } from './person-detail.component';
 import { PersonEditorComponent } from './person-editor.component';
 import { RouterModule } from '@angular/router';
 
+import { GenderPipe } from './gender.pipe';
+
 @NgModule({
-  declarations: [PersonListComponent, PersonDetailComponent, PersonEditorComponent],
+  declarations: [PersonListComponent, PersonDetailComponent, PersonEditorComponent, GenderPipe],
   imports: [
     CommonModule, ModelModule, RouterModule, FormsModule
   ],
   exports: [PersonListComponent, PersonDetailComponent, PersonEditorComponent]
 })
-export class ViewerModule { }
+export class PersonsModule { }
