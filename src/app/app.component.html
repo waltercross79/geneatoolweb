@@ -1,2 +1,12 @@
-<router-outlet></router-outlet>
-
+<div class="pure-g">
+    <div class="pure-u-1">
+        <a class="pure-button" routerLink="/persons">People</a>
+        <a class="pure-button" routerLink="/records">Records</a>
+    </div>
+    <div class="pure-u-1-6">
+        <router-outlet name="sidebar"></router-outlet>
+    </div>
+    <div class="pure-u-5-6">
+        <router-outlet></router-outlet>
+    </div>
+</div>
