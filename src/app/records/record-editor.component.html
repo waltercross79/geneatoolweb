@@ -1,4 +1,4 @@
-<div class="pure-g">
+<div *ngIf="!isSearchingPerson" class="pure-g">
     <div class="pure-u-1">
         <form>
             <div class="pure-u-1-5 l-box">Type of Record:</div>
@@ -36,6 +36,12 @@
             <div class="pure-u-4-5 l-box">
                 <input type="text" [(ngModel)]="record.country" name="country" />
             </div>
+            <div *ngFor='let p of record.peopleInRecord'>
+                <div class="pure-u-1-5 l-box">Person in Record:</div>
+                <div class="pure-u-2-5 l-box">{{ p.person.toString() }} - {{ p.personType | personType }}</div>                                
+                <div class="pure-u-2-5 l-box"><button class="pure-button" (click)="initPersonSearch()">Change</button><button class="pure-button">Delete</button></div>
+            </div>
+            <div *ngIf="record.peopleInRecord==null || record.peopleInRecord.lenght==0"><button class="pure-button">Add</button></div>
             <div class="pure-u-1 l-box">
                 <button type="submit" class="pure-button pure-button-primary" [class.pure-button-warning]="isEditing">
                     {{isEditing ? "Save" : "Create"}}
@@ -46,4 +52,9 @@
             </div>
         </form>
     </div>
+</div>
+
+<div *ngIf="isSearchingPerson" class="pure-g">
+    <app-person-picker></app-person-picker>
+    <div class="pure-u-1"><button class="pure-button" (click)="cancelPersonSearch()">Cancel</button></div>
 </div>

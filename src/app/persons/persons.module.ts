@@ -10,12 +10,13 @@ import { RouterModule } from '@angular/router';
 
 import { GenderPipe } from './gender.pipe';
 import { PersonFilterComponent } from './person-filter.component';
+import { PersonPickerComponent } from './person-picker.component';
 
 @NgModule({
-  declarations: [PersonListComponent, PersonDetailComponent, PersonEditorComponent, GenderPipe, PersonFilterComponent],
+  declarations: [PersonListComponent, PersonDetailComponent, PersonEditorComponent, GenderPipe, PersonFilterComponent, PersonPickerComponent],
   imports: [
     CommonModule, ModelModule, RouterModule, FormsModule
   ],
-  exports: [PersonListComponent, PersonDetailComponent, PersonEditorComponent]
+  exports: [PersonListComponent, PersonDetailComponent, PersonEditorComponent, PersonPickerComponent]
 })
 export class PersonsModule { }

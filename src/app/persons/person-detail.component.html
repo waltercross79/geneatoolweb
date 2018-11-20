@@ -6,7 +6,7 @@
         <div class="pure-u-1-5 l-box">Date of Birth:</div><div class="pure-u-4-5 l-box">{{ person.dateOfBirth | date }}</div>
         <div class="pure-u-1-5 l-box">Date of Death:</div><div class="pure-u-4-5 l-box">{{ person.dateOfDeath | date }}</div>
         <div class="pure-u-1-5 l-box">Gender:</div><div class="pure-u-4-5 l-box">{{ person.gender | gender }}</div>
-        <div class="pure-u-1 l-box">
+        <div *ngIf="isNested==false" class="pure-u-1 l-box">
             <button type="reset" class="pure-button pure-button-primary" routerLink="/persons">
                 Back
             </button>

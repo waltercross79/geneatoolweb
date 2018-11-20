@@ -12,6 +12,7 @@ import { PersonRepository } from '../model/person.repository';
 export class PersonDetailComponent implements OnInit {
 
   @Input() person: Person = new Person();
+  @Input() isNested: boolean = false;
   genders: [string, string][] = [['M', 'Male'], ['F', 'Female']];
 
   constructor(private personRepo: PersonRepository,
@@ -19,7 +20,6 @@ export class PersonDetailComponent implements OnInit {
     // parse the route and retrieve person ID:
     Object.assign(this.person,
           personRepo.getPerson(activeRoute.snapshot.params['id']));
-    //this.person = new Person(1, "Lada", "Kriz", "", new Date(1979, 10, 26), null);
   }
 
   ngOnInit() {

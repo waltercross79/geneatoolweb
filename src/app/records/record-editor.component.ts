@@ -12,6 +12,7 @@ import { RecordType } from '../model/record-type.enum';
 export class RecordEditorComponent implements OnInit {
 
   isEditing: boolean;
+  isSearchingPerson: boolean;
   record: Record = new Record();
   recordTypes: [number, string][] = [
     [RecordType.Birth, RecordType[RecordType.Birth]],
@@ -26,6 +27,14 @@ export class RecordEditorComponent implements OnInit {
       if(this.isEditing) {
         Object.assign(this.record, recordRepo.getRecord(activeRoute.snapshot.params['id']));
       }
+  }
+
+  initPersonSearch() {
+    this.isSearchingPerson = true;
+  }
+
+  cancelPersonSearch() {
+    this.isSearchingPerson = false;
   }
 
   ngOnInit() {
