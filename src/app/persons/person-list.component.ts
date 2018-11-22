@@ -10,7 +10,7 @@ import { PersonFilter } from '../model/person.filter';
 })
 export class PersonListComponent implements OnInit {
 
-  @Input() context; // context can be default|select => default shows view, edit and delete buttons, select shows select button.
+  @Input() context: string; // context can be default|select => default shows view, edit and delete buttons, select shows select button.
   @Input() filter: PersonFilter;
   personList: Person[];
 
