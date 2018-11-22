@@ -1,9 +1,8 @@
 <div class="pure-g">
   <div class="pure-u-1-5">
-    <!-- <app-person-filter></app-person-filter> -->
-    Person filter will be here!
+    <app-person-filter (filterSet)="onFilterSet($event)"></app-person-filter>    
   </div>
   <div class="pure-u-4-5">
-    <app-person-list [context]="select"></app-person-list>
+    <app-person-list [context]="select" [filter]="personFilter"></app-person-list>
   </div>  
 </div>

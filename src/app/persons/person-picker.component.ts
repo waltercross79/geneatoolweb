@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonFilter } from '../model/person.filter';
 
 @Component({
   selector: 'app-person-picker',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonPickerComponent implements OnInit {
 
+  personFilter: PersonFilter = new PersonFilter("Kriz", "Lada");
+
   constructor() { }
+
+  onFilterSet(filter: PersonFilter){
+    Object.assign(this.personFilter, filter);
+  }
 
   ngOnInit() {
   }
