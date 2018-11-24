@@ -3,6 +3,6 @@
     <app-person-filter (filterSet)="onFilterSet($event)"></app-person-filter>    
   </div>
   <div class="pure-u-4-5">
-    <app-person-list [context]="select" [filter]="personFilter"></app-person-list>
+    <app-person-list [context]="context" [filter]="personFilter" (selected)="onPersonSelected($event)" (cancelled)="cancel()"></app-person-list>
   </div>  
 </div>

@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let p of personList" >
+        <tr *ngFor="let p of getPersons()" >
           <td>{{ p.firstName }}</td>
           <td>{{ p.lastName }}</td>
           <td>{{ p.dateOfBirth | date }}</td>
@@ -24,10 +24,18 @@
             <button *ngIf="context=='default'" [routerLink]="['/persons/detail', p.id]" class="pure-button-primary pure-button">View</button>
             <button *ngIf="context=='default'" [routerLink]="['/persons/edit', p.id]" class="pure-button-secondary pure-button">Edit</button>
             <button *ngIf="context=='default'" class="button-error pure-button">Delete</button>
-            <button *ngIf="context=='select'" class="pure-button-primary pure-button">Select</button>
+            <button *ngIf="context=='select'" class="pure-button-primary pure-button" (click)="onSelectClick(p.id)">Select</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <div *ngIf="context=='select'" class="pure-u-1 l-box">            
+      <button type="reset" class="pure-button pure-button-secondary" (click)="cancel()">
+          Cancel
+      </button>                
+  </div>
+  <div *ngIf="context!='select'"  class="pure-u-1">
+      <button [routerLink]="['/persons/create']" class="pure-button pure-button-primary">Add</button>
+    </div>
 </div>

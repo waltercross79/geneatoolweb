@@ -1,24 +1,45 @@
 import { Injectable } from "@angular/core";
 import { Person } from './person.model';
-import { StaticDataSource } from "./static.datasource";
+import { RestDataSource } from "./rest.datasource";
 
 @Injectable()
 export class PersonRepository {
-    private persons: Person[];
+    private persons: Person[] = [];
 
-    constructor(private dataSource: StaticDataSource) {
+    constructor(private dataSource: RestDataSource) {
         dataSource.getPersons().subscribe(data => {
             this.persons = data;
         });
     }
 
-    public getPersons(): Person[] {
+    getPersons(): Person[] {
         return this.persons;
     }
 
-    public getPerson(id: number) {
-        return this.persons
-            .find(p => p.id == id);
+    getPerson(id: number) {
+        return this.persons.find(r => r.id == id);
+    }
+
+    savePerson(person: Person) {
+        if(person.id == null) {
+            this.dataSource
+                .savePerson(person)
+                .subscribe(r => this.persons.push(r));
+        } else {
+            this.dataSource
+                .updatePerson(person)
+                .subscribe(r => {
+                    this.persons.splice(this.persons.findIndex(r => r.id == person.id), 1, person);
+                });
+        }
+    }
+
+    deletePerson(id: number) {
+        this.dataSource
+            .deletePerson(id)
+            .subscribe(r => { 
+                this.persons.splice(this.persons.findIndex(r => r.id == id), 1);
+            });
     }
 }
 

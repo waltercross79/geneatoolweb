@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Person } from '../model/person.model';
 import { PersonRepository } from '../model/person.repository';
 import { PersonFilter } from '../model/person.filter';
@@ -10,15 +10,28 @@ import { PersonFilter } from '../model/person.filter';
 })
 export class PersonListComponent implements OnInit {
 
-  @Input() context: string; // context can be default|select => default shows view, edit and delete buttons, select shows select button.
+  @Input() context: string = "default"; // context can be default|select => default shows view, edit and delete buttons, select shows select button.
   @Input() filter: PersonFilter;
-  personList: Person[];
+  @Output() selected = new EventEmitter<number>();
+  @Output() cancelled = new EventEmitter();  
 
-  constructor(private personRepository: PersonRepository) { 
-    this.personList = personRepository.getPersons();
+  constructor(private personRepository: PersonRepository) {     
+  }
+
+  onSelectClick(id: number) {
+    this.selected.emit(id);
+  }
+
+  cancel() {
+    this.cancelled.emit();
   }
 
   ngOnInit() {
+    
+  }
+
+  getPersons(): Person[] {
+    return this.personRepository.getPersons();
   }
 
 }

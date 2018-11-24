@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Person } from './person.model';
+import { HttpClientModule } from "@angular/common/http";
 import { PersonRepository } from './person.repository';
 import { RecordRepository } from './record.repository';
-import { StaticDataSource } from './static.datasource';
+import { RestDataSource } from './rest.datasource';
 
 @NgModule({
   declarations: [],
-  providers: [PersonRepository, RecordRepository, StaticDataSource],
+  providers: [PersonRepository, RecordRepository, RestDataSource],
   imports: [
-    CommonModule
+    CommonModule, HttpClientModule
   ]
 })
 export class ModelModule { }

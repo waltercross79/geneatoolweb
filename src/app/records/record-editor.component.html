@@ -1,4 +1,4 @@
-<div *ngIf="!isSearchingPerson" class="pure-g">
+<div *ngIf="!isSearchingPerson && !isAddingPerson" class="pure-g">
     <div class="pure-u-1">
         <form>
             <div class="pure-u-1-5 l-box">Type of Record:</div>
@@ -36,12 +36,68 @@
             <div class="pure-u-4-5 l-box">
                 <input type="text" [(ngModel)]="record.country" name="country" />
             </div>
-            <div *ngFor='let p of record.peopleInRecord'>
-                <div class="pure-u-1-5 l-box">Person in Record:</div>
-                <div class="pure-u-2-5 l-box">{{ p.person.toString() }} - {{ p.personType | personType }}</div>                                
-                <div class="pure-u-2-5 l-box"><button class="pure-button" (click)="initPersonSearch()">Change</button><button class="pure-button">Delete</button></div>
+
+<!-- Mother = 1, Father = 2, Newborn = 3, Deceased = 4, Witness = 5, Godparent = 6, Bride = 7, Groom = 8 -->
+
+            <!-- Need logic specific for record type - different types of persons will be added/searched. -->
+            <!-- Birth -->
+            <div *ngIf="record.recordType==1">
+                <!-- Newborn -->
+                <div class="pure-u-1-5 l-box">Newborn:</div>
+                <div *ngIf="newborn!=null" class="pure-u-2-5 l-box">{{ newborn.person }}</div>
+                <div *ngIf="newborn!=null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonSearch(3)">Change</button>
+                    <button class="pure-button" (click)="removePersonFromRecord(3)">Remove</button>
+                </div>
+                <div *ngIf="newborn==null" class="pure-u-2-5 l-box">Missing</div>
+                <div *ngIf="newborn==null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonAdd(3)">Create</button>
+                    <button class="pure-button" (click)="initPersonSearch(3)">Find</button>
+                </div>
             </div>
-            <div *ngIf="record.peopleInRecord==null || record.peopleInRecord.lenght==0"><button class="pure-button">Add</button></div>
+            <!-- Death -->
+            <div *ngIf="record.recordType==2">
+                <!-- Deceased -->
+                <div class="pure-u-1-5 l-box">Deceased:</div>
+                <div *ngIf="deceased!=null" class="pure-u-2-5 l-box">{{ deceased.person }}</div>
+                <div *ngIf="deceased!=null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonSearch(4)">Change</button>
+                    <button class="pure-button" (click)="removePersonFromRecord(4)">Remove</button>
+                </div>
+                <div *ngIf="deceased==null" class="pure-u-2-5 l-box">Missing</div>
+                <div *ngIf="deceased==null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonAdd(4)">Create</button>
+                    <button class="pure-button" (click)="initPersonSearch(4)">Find</button>
+                </div>
+            </div>
+            <!-- Marriage -->
+            <div *ngIf="record.recordType==3">
+                <!-- Groom -->
+                <div class="pure-u-1-5 l-box">Groom:</div>
+                <div *ngIf="groom!=null" class="pure-u-2-5 l-box">{{ groom.person }}</div>
+                <div *ngIf="groom!=null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonSearch(8)">Change</button>
+                    <button class="pure-button" (click)="removePersonFromRecord(8)">Remove</button>
+                </div>
+                <div *ngIf="groom==null" class="pure-u-2-5 l-box">Missing</div>
+                <div *ngIf="groom==null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonAdd(8)">Create</button>
+                    <button class="pure-button" (click)="initPersonSearch(8)">Find</button>
+                </div>
+                <!-- Bride -->
+                <div class="pure-u-1-5 l-box">Bride:</div>
+                <div *ngIf="bride!=null" class="pure-u-2-5 l-box">{{ bride.person }}</div>
+                <div *ngIf="bride!=null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonSearch(7)">Change</button>
+                    <button class="pure-button" (click)="removePersonFromRecord(7)">Remove</button>
+                </div>
+                <div *ngIf="bride==null" class="pure-u-2-5 l-box">Missing</div>
+                <div *ngIf="bride==null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonAdd(7)">Create</button>
+                    <button class="pure-button" (click)="initPersonSearch(7)">Find</button>
+                </div>
+            </div>
+            
             <div class="pure-u-1 l-box">
                 <button type="submit" class="pure-button pure-button-primary" [class.pure-button-warning]="isEditing">
                     {{isEditing ? "Save" : "Create"}}
@@ -55,6 +111,9 @@
 </div>
 
 <div *ngIf="isSearchingPerson" class="pure-g">
-    <app-person-picker></app-person-picker>
-    <div class="pure-u-1"><button class="pure-button" (click)="cancelPersonSearch()">Cancel</button></div>
+    <app-person-picker (selectedPerson)="onPersonSelected($event)" (cancelled)="cancelPersonSearch()"></app-person-picker>    
+</div>
+
+<div *ngIf="isAddingPerson" class="pure-g">
+    <app-person-editor [context]="context" (saved)="onPersonAdded($event)" (cancelled)="cancelPersonAdd()"></app-person-editor>    
 </div>

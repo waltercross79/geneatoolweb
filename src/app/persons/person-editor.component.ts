@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Person } from '../model/person.model';
 import { PersonRepository } from '../model/person.repository';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -15,17 +16,34 @@ export class PersonEditorComponent implements OnInit {
   person: Person = new Person();
   isEditing: boolean = false;
   genders: [string, string][] = [['M', 'Male'], ['F', 'Female']];
+  @Input() public context: String = "persons";
+  @Output() cancelled: EventEmitter<void> = new EventEmitter();
+  @Output() saved: EventEmitter<Person> = new EventEmitter<Person>();
 
-  constructor(personRepo: PersonRepository, 
-    router: Router, activeRoute: ActivatedRoute) { 
-      
-      this.isEditing = activeRoute.snapshot.params['mode'] == 'edit';
-      if(this.isEditing) {
-        Object.assign(this.person, personRepo.getPerson(activeRoute.snapshot.params['id']));
-      }
+  constructor(private personRepo: PersonRepository, 
+    private router: Router, private activeRoute: ActivatedRoute) { 
+
   }
 
   ngOnInit() {
+    this.isEditing = (this.activeRoute.snapshot.params['mode'] == 'edit' && this.context == "persons");
+    if(this.isEditing) {
+      Object.assign(this.person, this.personRepo.getPerson(this.activeRoute.snapshot.params['id']));
+    }
+  }
+
+  cancel() {    
+    this.cancelled.emit();
+  }
+
+  save(form: NgForm) {
+    this.personRepo.savePerson(this.person);
+
+    if(this.context=="persons")
+      this.router.navigateByUrl('/persons');
+    else {
+      this.saved.emit(this.person);
+    }
   }
 
 }

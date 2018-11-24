@@ -1,6 +1,6 @@
 <div class="pure-g">
     <div class="pure-u-1">
-        <form>
+        <form #form="ngForm" (ngSubmit)="save(form)">
             <div class="pure-u-1-5 l-box">First Name:</div>
             <div class="pure-u-4-5 l-box">
                 <input type="text" [(ngModel)]="person.firstName" name="firstName" />
@@ -25,8 +25,6 @@
             </div>
             <div class="pure-u-1-5 l-box">Gender:</div>
             <div class="pure-u-4-5 l-box">
-                <!-- <input type="date" [ngModel]="person.dateOfDeath | date:'yyyy-MM-dd'" 
-                    (ngModelChange)="person.dateOfDeath=$event" name="dateOfDeath" /> -->
                 <select name="gender" [(ngModel)]="person.gender">
                     <option *ngFor="let g of genders" [value]="g[0]">{{ g[1] }}</option>
                 </select>
@@ -35,9 +33,12 @@
                 <button type="submit" class="pure-button pure-button-primary" [class.pure-button-warning]="isEditing">
                     {{isEditing ? "Save" : "Create"}}
                 </button>
-                <button type="reset" class="pure-button pure-button-secondary" routerLink="/persons">
+                <button *ngIf="context=='persons'" type="reset" class="pure-button pure-button-secondary" routerLink="/persons">
                     Cancel
                 </button>
+                <button *ngIf="context!='persons'" type="reset" class="pure-button pure-button-secondary" (click)="cancel()">
+                    Cancel
+                </button>                
             </div>
         </form>
     </div>
