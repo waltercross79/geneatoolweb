@@ -7,15 +7,18 @@ import { Record } from '../model/record.model';
   templateUrl: './record-list.component.html',
   styleUrls: ['./record-list.component.css']
 })
-export class RecordListComponent implements OnInit {
-
-  recordList: Record[];
+export class RecordListComponent implements OnInit {  
 
   constructor(private recordRepo: RecordRepository) { 
-    this.recordList = recordRepo.getRecords();
+    
   }
 
   ngOnInit() {
+    
+  }
+
+  getRecords() {
+    return this.recordRepo.getRecords();
   }
 
 }

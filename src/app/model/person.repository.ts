@@ -16,7 +16,7 @@ export class PersonRepository {
         return this.persons;
     }
 
-    getPerson(id: number) {
+    getPerson(id: string) {
         return this.persons.find(r => r.id == id);
     }
 
@@ -34,7 +34,7 @@ export class PersonRepository {
         }
     }
 
-    deletePerson(id: number) {
+    deletePerson(id: string) {
         this.dataSource
             .deletePerson(id)
             .subscribe(r => { 

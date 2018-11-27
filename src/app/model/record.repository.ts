@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Record } from './record.model';
 import { RestDataSource } from "./rest.datasource";
+import { Person } from "./person.model";
 
 @Injectable()
 export class RecordRepository {
@@ -10,6 +11,10 @@ export class RecordRepository {
     constructor(private dataSource: RestDataSource) { 
         dataSource.getRecords().subscribe(data => {
             this.records = data;
+            this.records.forEach(r => {
+                r.peopleInRecord.forEach(pir => pir.person = new Person(pir.person.id, pir.person.firstName, pir.person.lastName, pir.person.middleName,
+                    pir.person.dateOfBirth, pir.person.dateOfDeath, pir.person.gender));
+            });
         });
     }
 
@@ -17,7 +22,7 @@ export class RecordRepository {
         return this.records;
     }
 
-    getRecord(id: number) {
+    getRecord(id: string) {
         return this.records.find(r => r.id == id);
     }
 
@@ -35,7 +40,7 @@ export class RecordRepository {
         }
     }
 
-    deleteRecord(id: number) {
+    deleteRecord(id: string) {
         this.dataSource
             .deleteRecord(id)
             .subscribe(r => { 

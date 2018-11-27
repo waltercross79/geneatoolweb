@@ -7,7 +7,7 @@ import { map } from "rxjs/operators";
 import { HttpHeaders } from '@angular/common/http';
 
 const PROTOCOL = "http";
-const PORT = 3500;
+const PORT = 8080;
 
 @Injectable()
 export class RestDataSource {
@@ -25,7 +25,7 @@ export class RestDataSource {
       return this.http.post<Person>(this.baseUrl + "persons", person);
   }  
 
-  deletePerson(id: number): Observable<Person> {
+  deletePerson(id: string): Observable<Person> {
     return this.http.delete<Person>(`${this.baseUrl}persons/${id}`);
   }
 
@@ -41,7 +41,7 @@ export class RestDataSource {
     return this.http.post<Record>(this.baseUrl + "records", record);
   }
 
-  deleteRecord(id: number): Observable<Record> {
+  deleteRecord(id: string): Observable<Record> {
       return this.http.delete<Record>(`${this.baseUrl}records/${id}`);
   }
 
