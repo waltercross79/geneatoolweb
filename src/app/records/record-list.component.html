@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let r of getRecords()" >
-          <td>{{ r.recordDate | date }}</td>
+          <td>{{ r.recordDate | stringDate }}</td>
           <td>{{ r.recordType | recordType }}</td>
           <td>{{ r.peopleInRecord | comalist }}</td>          
           <td>{{ r.registryBook }}</td>
@@ -21,7 +21,7 @@
           <td>
             <button [routerLink]="['/records/detail', r.id]" class="pure-button-primary pure-button">View</button>
             <button [routerLink]="['/records/edit', r.id]" class="pure-button-secondary pure-button">Edit</button>
-            <button class="button-error pure-button">Delete</button>
+            <button class="button-error pure-button" (click)="delete(r.id)">Delete</button>
           </td>
         </tr>
       </tbody>

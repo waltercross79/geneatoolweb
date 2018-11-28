@@ -12,13 +12,13 @@ export class PersonListComponent implements OnInit {
 
   @Input() context: string = "default"; // context can be default|select => default shows view, edit and delete buttons, select shows select button.
   @Input() filter: PersonFilter;
-  @Output() selected = new EventEmitter<number>();
+  @Output() selected = new EventEmitter<String>();
   @Output() cancelled = new EventEmitter();  
 
   constructor(private personRepository: PersonRepository) {     
   }
 
-  onSelectClick(id: number) {
+  onSelectClick(id: string) {
     this.selected.emit(id);
   }
 
@@ -34,4 +34,7 @@ export class PersonListComponent implements OnInit {
     return this.personRepository.getPersons();
   }
 
+  delete(id: string) {
+    this.personRepository.deletePerson(id);
+  }
 }

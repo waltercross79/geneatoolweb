@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 import { RecordRepository } from '../model/record.repository';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Record } from '../model/record.model';
@@ -105,4 +107,9 @@ export class RecordEditorComponent implements OnInit {
       }
   }  
 
+  save(form: NgForm) {
+    this.recordRepo.saveRecord(this.record);
+
+    this.router.navigateByUrl('/records');    
+  }
 }

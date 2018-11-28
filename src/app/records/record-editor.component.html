@@ -1,6 +1,6 @@
 <div *ngIf="!isSearchingPerson && !isAddingPerson" class="pure-g">
     <div class="pure-u-1">
-        <form>
+        <form #form="ngForm" (ngSubmit)="save(form)">
             <div class="pure-u-1-5 l-box">Type of Record:</div>
             <div class="pure-u-4-5 l-box">
                 <select name="recordType" [(ngModel)]="record.recordType">

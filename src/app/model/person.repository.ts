@@ -24,7 +24,10 @@ export class PersonRepository {
         if(person.id == null) {
             this.dataSource
                 .savePerson(person)
-                .subscribe(r => this.persons.push(r));
+                .subscribe(r => { 
+                    this.persons.push(r); 
+                    person.id = r.id;
+                });
         } else {
             this.dataSource
                 .updatePerson(person)

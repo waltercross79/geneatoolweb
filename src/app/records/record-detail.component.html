@@ -5,7 +5,7 @@
             <div class="pure-u-1-5 l-box">Person in Record:</div><div class="pure-u-4-5 l-box">{{ p.person.toString() }} - {{ p.personType | personType }}</div>            
             <div style="padding-left: 10px;"><app-person-detail [person]="p.person" [isNested]="true"></app-person-detail></div>
       </div>
-      <div class="pure-u-1-5 l-box">Date Recorded:</div><div class="pure-u-4-5 l-box">{{ record.recordDate | date }}</div>
+      <div class="pure-u-1-5 l-box">Date Recorded:</div><div class="pure-u-4-5 l-box">{{ record.recordDate | stringDate }}</div>
       <div class="pure-u-1-5 l-box">Registry Book:</div><div class="pure-u-4-5 l-box">{{ record.registryBook }}</div>
       <div class="pure-u-1-5 l-box">Folio:</div><div class="pure-u-4-5 l-box">{{ record.folio }}</div>
       <div class="pure-u-1-5 l-box">House Number:</div><div class="pure-u-4-5 l-box">{{ record.houseNumber }}</div>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RecordRepository } from '../model/record.repository';
-import { Record } from '../model/record.model';
 
 @Component({
   selector: 'app-record-list',
@@ -21,4 +20,8 @@ export class RecordListComponent implements OnInit {
     return this.recordRepo.getRecords();
   }
 
+
+  delete(id: string) {
+    this.recordRepo.deleteRecord(id);
+  }
 }

@@ -30,12 +30,17 @@ export class RecordRepository {
         if(record.id == null) {
             this.dataSource
                 .saveRecord(record)
-                .subscribe(r => this.records.push(r));
+                .subscribe(r => {
+                    r.peopleInRecord.forEach(pir => pir.person = new Person(pir.person.id, pir.person.firstName, pir.person.lastName, pir.person.middleName,
+                        pir.person.dateOfBirth, pir.person.dateOfDeath, pir.person.gender));
+                    this.records.push(r);});
         } else {
             this.dataSource
                 .updateRecord(record)
                 .subscribe(r => {
-                    this.records.splice(this.records.findIndex(r => r.id == record.id), 1, record);
+                    r.peopleInRecord.forEach(pir => pir.person = new Person(pir.person.id, pir.person.firstName, pir.person.lastName, pir.person.middleName,
+                        pir.person.dateOfBirth, pir.person.dateOfDeath, pir.person.gender));
+                    this.records.splice(this.records.findIndex(r => r.id == record.id), 1, r);
                 });
         }
     }

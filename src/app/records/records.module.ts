@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from "@angular/forms";
+import { SharedModule } from '../shared/shared.module';
 
 import { RecordDetailComponent } from './record-detail.component';
 import { RecordEditorComponent } from './record-editor.component';
@@ -15,7 +16,7 @@ import { RecordFilterComponent } from './record-filter.component';
 @NgModule({
   declarations: [RecordDetailComponent, RecordEditorComponent, RecordListComponent, ComalistPipe, RecordTypePipe, PersonTypePipe, RecordFilterComponent],
   imports: [
-    CommonModule, RouterModule, PersonsModule, FormsModule
+    CommonModule, RouterModule, PersonsModule, FormsModule, SharedModule
   ]
 })
 export class RecordsModule { }
