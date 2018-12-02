@@ -28,10 +28,10 @@ export class RecordEditorComponent implements OnInit {
     [RecordType.Marriage, RecordType[RecordType.Marriage]],
     [RecordType.Death, RecordType[RecordType.Death]],
   ];
-  newborn: Person;
-  deceased: Person;
-  groom: Person;
-  bride: Person;
+  newborn: PersonInRecord;
+  deceased: PersonInRecord;
+  groom: PersonInRecord;
+  bride: PersonInRecord;
 
   constructor(private recordRepo: RecordRepository, 
     private router: Router, private activeRoute: ActivatedRoute) {             
@@ -49,14 +49,12 @@ export class RecordEditorComponent implements OnInit {
   }
 
   onPersonSelected(p: Person) {
-    let person = new Person(); // Create a copy - may not be needed; must try.
-
     let existingPersonInRecord = this.record.peopleInRecord.find(pir => pir.personType == this.currentlyModifiedPersonType);
 
     if(existingPersonInRecord != null) {
       this.record.peopleInRecord.splice(this.record.peopleInRecord.indexOf(existingPersonInRecord), 1);
     }
-    this.record.peopleInRecord.push(new PersonInRecord(Object.assign(person, p), this.currentlyModifiedPersonType));
+    this.record.peopleInRecord.push(new PersonInRecord(p, this.currentlyModifiedPersonType));
     this.refreshLocalVarsPeopleInRecord();
 
     this.isSearchingPerson = false;
@@ -91,8 +89,7 @@ export class RecordEditorComponent implements OnInit {
   }
 
   onPersonAdded(p: Person) {
-    let person = new Person(); // Create a copy - may not be needed; must try.
-    this.record.peopleInRecord.push(new PersonInRecord(Object.assign(person, p), this.currentlyModifiedPersonType));
+    this.record.peopleInRecord.push(new PersonInRecord(p, this.currentlyModifiedPersonType));
     this.refreshLocalVarsPeopleInRecord();
 
     this.isAddingPerson = false;

@@ -13,7 +13,7 @@ export class ComalistPipe implements PipeTransform {
     let result: String = '';    
     
     for (let i = 0; i < value.length; i++) {
-      let name = value[i].person.toString();
+      let name = `${value[i].person.firstName} ${value[i].person.lastName}`;
       if(i == 0)
         result = name;
       else

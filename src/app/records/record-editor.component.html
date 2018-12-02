@@ -44,7 +44,7 @@
             <div *ngIf="record.recordType==1">
                 <!-- Newborn -->
                 <div class="pure-u-1-5 l-box">Newborn:</div>
-                <div *ngIf="newborn!=null" class="pure-u-2-5 l-box">{{ newborn.person }}</div>
+                <div *ngIf="newborn!=null" class="pure-u-2-5 l-box">{{ newborn.person != null ? newborn.person.id : 'no-id' }} {{ newborn.person | personname }}</div>
                 <div *ngIf="newborn!=null" class="pure-u-2-5 l-box">
                     <button class="pure-button" (click)="initPersonSearch(3)">Change</button>
                     <button class="pure-button" (click)="removePersonFromRecord(3)">Remove</button>
@@ -59,7 +59,7 @@
             <div *ngIf="record.recordType==2">
                 <!-- Deceased -->
                 <div class="pure-u-1-5 l-box">Deceased:</div>
-                <div *ngIf="deceased!=null" class="pure-u-2-5 l-box">{{ deceased.person }}</div>
+                <div *ngIf="deceased!=null" class="pure-u-2-5 l-box">{{ deceased.person | personname }}</div>
                 <div *ngIf="deceased!=null" class="pure-u-2-5 l-box">
                     <button class="pure-button" (click)="initPersonSearch(4)">Change</button>
                     <button class="pure-button" (click)="removePersonFromRecord(4)">Remove</button>
@@ -74,7 +74,7 @@
             <div *ngIf="record.recordType==3">
                 <!-- Groom -->
                 <div class="pure-u-1-5 l-box">Groom:</div>
-                <div *ngIf="groom!=null" class="pure-u-2-5 l-box">{{ groom.person }}</div>
+                <div *ngIf="groom!=null" class="pure-u-2-5 l-box">{{ groom.person | personname }}</div>
                 <div *ngIf="groom!=null" class="pure-u-2-5 l-box">
                     <button class="pure-button" (click)="initPersonSearch(8)">Change</button>
                     <button class="pure-button" (click)="removePersonFromRecord(8)">Remove</button>
@@ -86,7 +86,7 @@
                 </div>
                 <!-- Bride -->
                 <div class="pure-u-1-5 l-box">Bride:</div>
-                <div *ngIf="bride!=null" class="pure-u-2-5 l-box">{{ bride.person }}</div>
+                <div *ngIf="bride!=null" class="pure-u-2-5 l-box">{{ bride.person | personname }}</div>
                 <div *ngIf="bride!=null" class="pure-u-2-5 l-box">
                     <button class="pure-button" (click)="initPersonSearch(7)">Change</button>
                     <button class="pure-button" (click)="removePersonFromRecord(7)">Remove</button>

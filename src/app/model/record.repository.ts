@@ -11,10 +11,6 @@ export class RecordRepository {
     constructor(private dataSource: RestDataSource) { 
         dataSource.getRecords().subscribe(data => {
             this.records = data;
-            this.records.forEach(r => {
-                r.peopleInRecord.forEach(pir => pir.person = new Person(pir.person.id, pir.person.firstName, pir.person.lastName, pir.person.middleName,
-                    pir.person.dateOfBirth, pir.person.dateOfDeath, pir.person.gender));
-            });
         });
     }
 
@@ -30,16 +26,12 @@ export class RecordRepository {
         if(record.id == null) {
             this.dataSource
                 .saveRecord(record)
-                .subscribe(r => {
-                    r.peopleInRecord.forEach(pir => pir.person = new Person(pir.person.id, pir.person.firstName, pir.person.lastName, pir.person.middleName,
-                        pir.person.dateOfBirth, pir.person.dateOfDeath, pir.person.gender));
+                .subscribe(r => {                    
                     this.records.push(r);});
         } else {
             this.dataSource
                 .updateRecord(record)
                 .subscribe(r => {
-                    r.peopleInRecord.forEach(pir => pir.person = new Person(pir.person.id, pir.person.firstName, pir.person.lastName, pir.person.middleName,
-                        pir.person.dateOfBirth, pir.person.dateOfDeath, pir.person.gender));
                     this.records.splice(this.records.findIndex(r => r.id == record.id), 1, r);
                 });
         }
