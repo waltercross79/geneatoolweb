@@ -2,10 +2,13 @@
     <div class="pure-u-1">
         <div class="pure-u-1-5 l-box">First Name:</div><div class="pure-u-4-5 l-box">{{ person.firstName }}</div>
         <div class="pure-u-1-5 l-box">Last Name:</div><div class="pure-u-4-5 l-box">{{ person.lastName }}</div>
-        <div class="pure-u-1-5 l-box">Middle Name:</div><div class="pure-u-4-5 l-box">{{ person.middleName }}</div>
         <div class="pure-u-1-5 l-box">Date of Birth:</div><div class="pure-u-4-5 l-box">{{ person.dateOfBirth | stringDate }}</div>
         <div class="pure-u-1-5 l-box">Date of Death:</div><div class="pure-u-4-5 l-box">{{ person.dateOfDeath | stringDate }}</div>
-        <div class="pure-u-1-5 l-box">Gender:</div><div class="pure-u-4-5 l-box">{{ person.gender | gender }}</div>
+        <div class="pure-u-1-5 l-box">Gender:</div><div class="pure-u-4-5 l-box">{{ person.gender | gender }}</div>        
+        <div class="pure-u-1-5 l-box">Father:</div><div *ngIf="person.father != null" class="pure-u-4-5 l-box">{{ person.father() | personname }}</div>
+                                                   <div *ngIf="person.father == null" class="pure-u-4-5 l-box">Unknown</div>
+        <div class="pure-u-1-5 l-box">Mother:</div><div *ngIf="person.mother != null" class="pure-u-4-5 l-box">{{ person.mother() | personname }}</div>
+                                                   <div *ngIf="person.mother == null" class="pure-u-4-5 l-box">Unknown</div>
         <div *ngIf="isNested==false" class="pure-u-1 l-box">
             <button type="reset" class="pure-button pure-button-primary" routerLink="/persons">
                 Back

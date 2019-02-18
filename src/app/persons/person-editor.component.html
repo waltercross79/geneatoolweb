@@ -1,4 +1,4 @@
-<div class="pure-g">
+<div *ngIf="!isSearchingPerson" class="pure-g">
     <div class="pure-u-1">
         <form #form="ngForm" (ngSubmit)="save(form)">
             <div class="pure-u-1-5 l-box">First Name:</div>
@@ -8,11 +8,7 @@
             <div class="pure-u-1-5 l-box">Last Name:</div>
             <div class="pure-u-4-5 l-box">
                 <input type="text" [(ngModel)]="person.lastName" name="lastName" />
-            </div>
-            <div class="pure-u-1-5 l-box">Middle Name:</div>
-            <div class="pure-u-4-5 l-box">
-                <input type="text" [(ngModel)]="person.middleName" name="middleName" />
-            </div>
+            </div>            
             <div class="pure-u-1-5 l-box">Date of Birth:</div>
             <div class="pure-u-4-5 l-box">
                 <input type="date" [ngModel]="person.dateOfBirth | date:'yyyy-MM-dd'" 
@@ -29,6 +25,37 @@
                     <option *ngFor="let g of genders" [value]="g[0]">{{ g[1] }}</option>
                 </select>
             </div>
+
+            <!-- Parents -->
+            <div>
+                <!-- Father -->
+                <div class="pure-u-1-5 l-box">Father:</div>
+                <div *ngIf="father!=null" class="pure-u-2-5 l-box">{{ father | personname }}</div>
+                <div *ngIf="father!=null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonSearch(2)">Change</button>
+                    <button class="pure-button" (click)="removeParent(father)">Remove</button>
+                </div>
+                <div *ngIf="father==null" class="pure-u-2-5 l-box">Missing</div>
+                <div *ngIf="father==null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonSearch(2)">Find</button>
+                </div>
+
+                <!-- Mother -->
+                <div class="pure-u-1-5 l-box">Mother:</div>
+                <div *ngIf="mother!=null" class="pure-u-2-5 l-box">{{ mother | personname }}</div>
+                <div *ngIf="mother!=null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonSearch(1)">Change</button>
+                    <button class="pure-button" (click)="removeParent(mother)">Remove</button>
+                </div>
+                <div *ngIf="mother==null" class="pure-u-2-5 l-box">Missing</div>
+                <div *ngIf="mother==null" class="pure-u-2-5 l-box">
+                    <button class="pure-button" (click)="initPersonSearch(1)">Find</button>
+                </div>
+
+            </div>
+
+
+
             <div class="pure-u-1 l-box">
                 <button type="submit" class="pure-button pure-button-primary" [class.pure-button-warning]="isEditing">
                     {{isEditing ? "Save" : "Create"}}
@@ -42,4 +69,8 @@
             </div>
         </form>
     </div>
+</div>
+
+<div *ngIf="isSearchingPerson" class="pure-g">
+    <app-person-picker (selectedPerson)="onPersonSelected($event)" (cancelled)="cancelPersonSearch()"></app-person-picker>    
 </div>

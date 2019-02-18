@@ -21,7 +21,7 @@ export class PersonPickerComponent implements OnInit {
     Object.assign(this.personFilter, filter);
   }
 
-  onPersonSelected(id: string) {
+  onPersonSelected(id: number) {
     // Fire even selectedPerson;
     let p = this.personRepo.getPerson(id);
 

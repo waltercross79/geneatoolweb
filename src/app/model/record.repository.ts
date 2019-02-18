@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Record } from './record.model';
-import { RestDataSource } from "./rest.datasource";
+import { RestRecordDataSource } from "./rest.datasource.records";
 import { Person } from "./person.model";
 
 @Injectable()
@@ -8,7 +8,7 @@ export class RecordRepository {
 
     records: Record[];
 
-    constructor(private dataSource: RestDataSource) { 
+    constructor(private dataSource: RestRecordDataSource) { 
         dataSource.getRecords().subscribe(data => {
             this.records = data;
         });

@@ -14,7 +14,8 @@ import { PersonsModule } from '../persons/persons.module';
 import { RecordFilterComponent } from './record-filter.component';
 
 @NgModule({
-  declarations: [RecordDetailComponent, RecordEditorComponent, RecordListComponent, ComalistPipe, RecordTypePipe, PersonTypePipe, RecordFilterComponent],
+  declarations: [RecordDetailComponent, RecordEditorComponent, RecordListComponent, 
+    ComalistPipe, RecordTypePipe, PersonTypePipe, RecordFilterComponent],
   imports: [
     CommonModule, RouterModule, PersonsModule, FormsModule, SharedModule
   ]

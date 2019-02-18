@@ -12,6 +12,7 @@
                 <input type="date" [ngModel]="record.recordDate | date:'yyyy-MM-dd'" 
                   (ngModelChange)="record.recordDate=$event" name="recordDate" />
             </div>
+
             <div class="pure-u-1-5 l-box">Registry Book:</div>
             <div class="pure-u-4-5 l-box">
                 <input type="text" [(ngModel)]="record.registryBook" name="registryBook" />
@@ -95,6 +96,27 @@
                 <div *ngIf="bride==null" class="pure-u-2-5 l-box">
                     <button class="pure-button" (click)="initPersonAdd(7)">Create</button>
                     <button class="pure-button" (click)="initPersonSearch(7)">Find</button>
+                </div>
+            </div>
+
+            <div *ngFor="let pir of otherPeople">
+                <div class="pure-u-1-5 l-box">{{ pir.personType | personType }}</div>
+                <div class="pure-u-2-5 l-box">{{ pir.person | personname }}</div>
+                <div class="pure-u-2-5 l-box">                    
+                    <button class="pure-button" (click)="removeAdditionalPersonFromRecord(pir.personType, pir.person.id)">Remove</button>
+                </div>
+            </div>
+
+            <div>
+                <div class="pure-u-1-5 l-box">
+                    <select [(ngModel)]="nextAdditionalPersonType" name="nextAdditionalPersonType">
+                        <option *ngFor="let pt of personTypes" [value]="pt[0]">{{ pt[1] }}</option>
+                    </select>
+                </div>
+                <div class="pure-u-1-5 l-box"><input type="text" [(ngModel)]="nextAdditionalPersonFirstName" name="nextAdditionalPersonFirstName" /></div>
+                <div class="pure-u-1-5 l-box"><input type="text" [(ngModel)]="nextAdditionalPersonLastName" name="nextAdditionalPersonLastName" /></div>
+                <div class="pure-u-2-5 l-box">                    
+                    <button class="pure-button" (click)="addAdditionalPersonInRecord()">Add</button>
                 </div>
             </div>
             

@@ -3,7 +3,7 @@
       <div class="pure-u-1-5 l-box">Type of Record:</div><div class="pure-u-4-5 l-box">{{ record.recordType | recordType }}</div>      
       <div *ngFor='let p of record.peopleInRecord'>
             <div class="pure-u-1-5 l-box">Person in Record:</div><div class="pure-u-4-5 l-box">{{ p.person | personname }} - {{ p.personType | personType }}</div>            
-            <div style="padding-left: 10px;"><app-person-detail [person]="p.person" [isNested]="true"></app-person-detail></div>
+            <!-- <div *ngIf="p.person.id > 0" style="padding-left: 10px;"><app-person-detail [person]="p.person" [isNested]="true"></app-person-detail></div> -->
       </div>
       <div class="pure-u-1-5 l-box">Date Recorded:</div><div class="pure-u-4-5 l-box">{{ record.recordDate | stringDate }}</div>
       <div class="pure-u-1-5 l-box">Registry Book:</div><div class="pure-u-4-5 l-box">{{ record.registryBook }}</div>

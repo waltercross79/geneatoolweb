@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Person } from './person.model';
-import { RestDataSource } from "./rest.datasource";
+import { RestPersonDataSource } from "./rest.datasource.persons";
 
 @Injectable()
 export class PersonRepository {
     private persons: Person[] = [];
 
-    constructor(private dataSource: RestDataSource) {
+    constructor(private dataSource: RestPersonDataSource) {
         dataSource.getPersons().subscribe(data => {
-            this.persons = data;
+            this.persons = data.results;
         });
     }
 
@@ -16,7 +16,7 @@ export class PersonRepository {
         return this.persons;
     }
 
-    getPerson(id: string) {
+    getPerson(id: number) {
         return this.persons.find(r => r.id == id);
     }
 
@@ -37,7 +37,7 @@ export class PersonRepository {
         }
     }
 
-    deletePerson(id: string) {
+    deletePerson(id: number) {
         this.dataSource
             .deletePerson(id)
             .subscribe(r => { 

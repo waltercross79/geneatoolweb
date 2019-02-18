@@ -34,7 +34,7 @@ export class PersonListComponent implements OnInit {
     return this.personRepository.getPersons();
   }
 
-  delete(id: string) {
+  delete(id: number) {
     this.personRepository.deletePerson(id);
   }
 }

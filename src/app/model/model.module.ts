@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
 import { PersonRepository } from './person.repository';
 import { RecordRepository } from './record.repository';
-import { RestDataSource } from './rest.datasource';
+import { RestRecordDataSource } from './rest.datasource.records';
+import { RestPersonDataSource } from './rest.datasource.persons';
+
 
 @NgModule({
   declarations: [],
-  providers: [PersonRepository, RecordRepository, RestDataSource],
+  providers: [PersonRepository, RecordRepository, RestRecordDataSource, RestPersonDataSource],
   imports: [
     CommonModule, HttpClientModule
   ]
