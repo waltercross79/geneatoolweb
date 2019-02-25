@@ -45,6 +45,11 @@ export class RecordEditorComponent implements OnInit {
   nextAdditionalPersonType: PersonType;
   nextAdditionalPersonID: number = -1;
 
+  fileToUpload: File = null;
+  fileUploadResult: String = null;
+
+  status: String = null;
+
   constructor(private recordRepo: RecordRepository, 
     private router: Router, private activeRoute: ActivatedRoute) {             
   }
@@ -143,8 +148,35 @@ export class RecordEditorComponent implements OnInit {
   }  
 
   save(form: NgForm) {
-    this.recordRepo.saveRecord(this.record);
+    this.status = "Saving record..."
+    this.recordRepo.saveRecord(this.record)
+      .subscribe(r => {
+        this.status = "Saving record file...";
+        if(this.record.id != null && this.fileToUpload != null) {
+          this.recordRepo.saveRecordFile(this.fileToUpload, this.record.id)
+            .subscribe(x => { 
+              this.fileUploadResult = x; 
+              this.fileToUpload = null;   
+              this.router.navigateByUrl('/records/detail/' + this.record.id);               
+          });       
+        }
+        else {
+          this.router.navigateByUrl('/records/detail/' + this.record.id);    
+        }                 
+      });        
+  }
 
-    this.router.navigateByUrl('/records');    
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);   
+  }
+
+  uploadFile() {
+    if(this.record.id != null && this.fileToUpload != null) {
+      this.recordRepo.saveRecordFile(this.fileToUpload, this.record.id)
+        .subscribe(x => { 
+          this.fileUploadResult = x; 
+          this.fileToUpload = null;                       
+      });       
+    }
   }
 }

@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Person } from "./person.model";
 import { Record } from "./record.model";
 import { map } from 'rxjs/operators';
-import { RecordsModule } from "../records/records.module";
+import { RecordFile } from './record-file.model';
 
 const PROTOCOL = "http";
 const PORT = 8090;
@@ -50,4 +49,22 @@ export class RestRecordDataSource {
         r.city, r.country, r.registryBook)
       ));
   }  
+
+  uploadRecordFile(fileToUpload: File, id: String): Observable<String> {
+    const endpoint = `${this.baseUrl}recordfiles/${id}`;
+
+    var formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+
+    return this.http
+      .post(endpoint, formData, { responseType: "text" });
+  }
+
+  downloadRecordFile(recordId: String) : Observable<RecordFile> {
+    return this.http.get<RecordFile>(`${this.baseUrl}recordfiles/${recordId}`);        
+  }
+
+  recordFileUrl(recordId: String) : String {
+    return `${this.baseUrl}recordfiles/${recordId}`;
+  }
 }

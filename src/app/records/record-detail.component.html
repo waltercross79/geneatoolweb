@@ -13,9 +13,14 @@
       <div class="pure-u-1-5 l-box">City:</div><div class="pure-u-4-5 l-box">{{ record.city }}</div>
       <div *ngIf="record.country != null"><div class="pure-u-1-5 l-box">Country:</div><div class="pure-u-4-5 l-box">{{ record.country }}</div></div>
       <div class="pure-u-1 l-box">
-          <button type="reset" class="pure-button pure-button-primary" routerLink="/records">
-              Back
-          </button>
+        <button type="reset" class="pure-button pure-button-primary" routerLink="/records">
+            Back
+        </button>
       </div>
+      <div>
+          <input type="button" *ngIf="imageUrl == null" (click)="showImage()" value="Show Record" />
+          <img *ngIf="imageUrl != null" src="{{ imageUrl }}" alt="Record image" title="Show record image." />
+      </div>
+      
   <div>
 </div>

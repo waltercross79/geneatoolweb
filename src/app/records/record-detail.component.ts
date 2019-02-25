@@ -12,6 +12,7 @@ import { RecordRepository } from '../model/record.repository';
 export class RecordDetailComponent implements OnInit {
 
   record: Record = new Record();
+  imageUrl: String = null;
 
   constructor(private recordRepo: RecordRepository, router: Router, 
     activeRoute: ActivatedRoute) { 
@@ -21,4 +22,7 @@ export class RecordDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  showImage() {
+    this.imageUrl = this.recordRepo.getRecordFileUrl(this.record.id);
+  }
 }
